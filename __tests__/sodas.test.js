@@ -48,6 +48,20 @@ describe('backend-express-template routes', () => {
         'https://m.media-amazon.com/images/I/61jZROIca6L._SY445_PIbundle-6,TopRight,0,0_SX311SY445SH20_.jpg',
     });
   });
+  it('#POST /sodas should create a new soda', async () => {
+    const newSoda = {
+      name: 'Bahamas Goombay Punch',
+      country: 'Bahamas',
+      color: 'Yellow',
+      image: 'https://i.ebayimg.com/images/g/FPMAAOSwSZNi3m-C/s-l500.jpg',
+    };
+    const resp = await request(app).post('/sodas').send(newSoda);
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({
+      id: expect.any(String),
+      ...newSoda,
+    });
+  });
   afterAll(() => {
     pool.end();
   });
