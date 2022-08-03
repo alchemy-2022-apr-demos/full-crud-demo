@@ -70,6 +70,13 @@ describe('backend-express-template routes', () => {
     expect(resp.status).toBe(200);
     expect(resp.body.color).toBe('Yellow');
   });
+  it('#DELETE /sodas/:id should delete a soda', async () => {
+    const resp = await request(app).delete('/sodas/1');
+    expect(resp.status).toBe(200);
+
+    const sodaResp = await request(app).get('/sodas/1');
+    expect(sodaResp.status).toBe(404);
+  });
   afterAll(() => {
     pool.end();
   });
