@@ -36,6 +36,18 @@ describe('backend-express-template routes', () => {
       },
     ]);
   });
+  it('#GET sodas/:id should return a single soda', async () => {
+    const resp = await request(app).get('/sodas/2');
+    expect(resp.status).toBe(200);
+    expect(resp.body).toEqual({
+      id: '2',
+      name: 'Irn Bru',
+      country: 'Scotland',
+      color: 'Orange',
+      image:
+        'https://m.media-amazon.com/images/I/61jZROIca6L._SY445_PIbundle-6,TopRight,0,0_SX311SY445SH20_.jpg',
+    });
+  });
   afterAll(() => {
     pool.end();
   });
