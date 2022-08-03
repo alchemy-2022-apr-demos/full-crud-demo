@@ -62,6 +62,14 @@ describe('backend-express-template routes', () => {
       ...newSoda,
     });
   });
+  it('#PUT /sodas/:id should update an existing soda', async () => {
+    const resp = await request(app).put('/sodas/1').send({
+      color: 'Yellow',
+    });
+    console.log(resp.body);
+    expect(resp.status).toBe(200);
+    expect(resp.body.color).toBe('Yellow');
+  });
   afterAll(() => {
     pool.end();
   });
